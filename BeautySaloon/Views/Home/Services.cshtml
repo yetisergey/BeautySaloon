@@ -1,0 +1,98 @@
+﻿@{
+    ViewBag.Title = "Услуги";
+}
+<link href="https://fonts.googleapis.com/css?family=Roboto:500" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Roboto:700" rel="stylesheet">
+
+<div class="container">
+    <section class="pb-3 text-center " id="mainList" data-bind="with:mainServicesList">
+        <h2 class="h2 py-2">Наши @ViewBag.Title</h2>
+        <p class="grey-text mb-4">
+            Рады предложить вам самые разнообразные услуги в области красоты!
+        </p>
+        <div class="row" data-bind="foreach:List">
+            <div class="col-md-4" data-bind="attr:{id:Id}, click:$parent.Click.bind($data)">
+                <div class="card card-cascade narrower card-ecommerce">
+                    <div class="view overlay hm-white-slight">
+                        <img data-bind="attr : {src:Photo}" class="img-fluid">
+                        <a>
+                            <div class="mask waves-effect waves-light"></div>
+                        </a>
+                    </div>
+                    <div class="card-body text-center no-padding">
+                        <h4 class="card-title ">
+                            <strong>
+                                <a href="" class="gold-color" data-bind="html:Name"></a>
+                            </strong>
+                        </h4>
+                        <p class="card-text" data-bind="text:Description">
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="pb-3 text-center" id="subList" style="display:none" data-bind="with:subServicesList">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="javascript:void(0);" data-bind="click:back" class="gold-color">Вернуться к услугам</a></li>
+        </ol>
+        <h2 class="h2 py-2" data-bind="text:title"></h2>
+        <p class="grey-text mb-4" data-bind="text:description"></p>
+        <div class="row" data-bind="foreach:List">
+            <div class="col-md-4 mb-3">
+                <div class="card card-cascade narrower card-ecommerce">
+                    <div class="view overlay hm-white-slight">
+                        <img data-bind="attr : {src:Photo}" class="img-fluid">
+                        <a>
+                            <div class="mask waves-effect waves-light"></div>
+                        </a>
+                    </div>
+                    <div class="card-body text-center no-padding">
+                        <h4 class="card-title ">
+                            <strong>
+                                <a href="" class="gold-color" data-bind="html:Name"></a>
+                            </strong>
+                        </h4>
+                        <div class="card-footer">
+                            <span class="font-weight-bold text-center" data-bind="text:Coast +' рублей'"></span>
+                            <button class="btn back-black-color gold-color waves-effect waves-light" data-toggle="modal" data-target="#orderModal">
+                                Записаться
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<div class="modal fade" id="orderModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Мы перезвоним Вам через 25 секунд!</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="md-form">
+                    <input type="text" id="form-name" class="form-control">
+                    <label for="form-name">Ваше имя</label>
+                </div>
+                <div class="md-form">
+                    <input type="text" id="form-phone" class="form-control">
+                    <label for="form-phone">Телефон</label>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-danger btn-rounded waves-effect" data-dismiss="modal">Закрыть</button>
+                <button type="button" class="btn btn-outline-default btn-rounded waves-effect" id="sendMessage">Отправить</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/Scripts/jquery-2.0.0.min.js"></script>
+<script src="~/Scripts/knockout-3.4.2.js"></script>
+<script src="~/Scripts/app/home.services.js"></script>

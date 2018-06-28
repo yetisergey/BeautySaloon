@@ -1,0 +1,130 @@
+﻿@{
+    ViewBag.Title = "Услуги";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<link rel="stylesheet" href="~/Content/bootstrap-treeview.min.css" />
+<script src="~/Scripts/knockout-3.4.2.js"></script>
+<script src="~/Scripts/bootstrap.min.js"></script>
+<script src="~/Scripts/bootstrap-treeview.min.js"></script>
+<script src="~/Scripts/binds/filebind.js"></script>
+<script src="~/Scripts/app/admin.services.js"></script>
+<div class="row">
+    <h2>Услуги</h2>
+    <hr />
+    <button class="btn btn-success" data-bind="click:createPart">Добавить новый раздел</button>
+    <button class="btn btn-default" data-bind="visible:currentService()&& partFlag()===false,click:createService" style="display:none">Добавить услугу</button>
+    <button class="btn btn-warning" data-bind="visible:currentService(),click:updateService" style="display:none">Редактировать</button>
+    <button class="btn btn-danger" data-bind="visible:currentService(),click:deleteService" style="display:none">Удалить</button>
+    <div id="listContainerTree" style="margin-top:10px"></div>
+    <hr />
+    <div data-bind="visible:currentService()">
+        <div data-bind="with:imageDialog">
+            <button class="btn btn-default" data-bind="click:createPhoto">Добавить Фото</button>
+            <div data-bind="foreach: images">
+                <img data-bind="attr: { id: id ,src: '/Images/'+ FileName}" onclick="deletePhoto(this.id)" />
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" tabindex="-1" role="dialog" id="photoModal" data-bind="with:photoDialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Добавить фотографию</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-horizontal">
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">Фото</label>
+                        <div class="col-sm-8">
+                            <input type="file" id="inputFile" data-bind="file: file, allowed:'.jpg,.png'" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+                <button type="button" class="btn btn-success" data-dismiss="modal" data-bind="click:savePhoto">Сохранить</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" tabindex="-1" role="dialog" id="partModal" data-bind="with:partDialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Раздел</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-horizontal">
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">Наименование</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" data-bind="value: Name">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">Описание</label>
+                        <div class="col-sm-8">
+                            <textarea type="text" class="form-control" data-bind="value: Description" style="max-width:100%"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+                <button type="button" class="btn btn-success" data-dismiss="modal" data-bind="click:savePart">Сохранить</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" tabindex="-1" role="dialog" id="serviceModal" data-bind="with:serviceDialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Раздел</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-horizontal">
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">Наименование</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" data-bind="value: Name">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">Стоимость</label>
+                        <div class="col-sm-8">
+                            <input type="number" step="0.01" class="form-control" data-bind="value: Coast" style="max-width:100%">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+                <button type="button" class="btn btn-success" data-dismiss="modal" data-bind="click:save">Сохранить</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" tabindex="-1" role="dialog" id="deletePhotoModal" data-bind="with:deletePhotoDialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Удаление фотографии</h4>
+            </div>
+            <div class="modal-body">
+                <p>Удалить фото?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+                <button type="button" class="btn btn-success" data-dismiss="modal" data-bind="click:deletePhoto">Удалить</button>
+            </div>
+        </div>
+    </div>
+</div>

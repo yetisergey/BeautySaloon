@@ -1,0 +1,84 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+    <link rel="stylesheet" href="~/Content/compiled.min.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300" rel="stylesheet">
+    <style>
+        .gold-color {
+            color: #e6a955 !important;
+        }
+
+        .back-black-color {
+            background-color: #f4f4f4 !important;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark black">
+            <div class="container">
+                <a class="navbar-brand" style="width: 165px;" href="/"><img style="width: inherit;height: inherit;" src="/img/story.png"></a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item">
+                            <a class="nav-link waves-effect waves-light gold-color" href="/Home/Index">
+                                О салоне
+                            </a>
+                        </li>
+                        <li class="nav-item" id="Services">
+                            <a class="nav-link waves-effect waves-light gold-color" href="/Home/Services">Услуги</a>
+                        </li>
+                        <li class="nav-item" id="Photos">
+                            <a class="nav-link waves-effect waves-light gold-color" href="/Home/Photos">Фото</a>
+                        </li>
+                        <li class="nav-item" id="Contacts">
+                            <a class="nav-link waves-effect waves-light gold-color" href="/Home/Contacts">Контакты</a>
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav nav-flex-icons">
+                        <li class="nav-item">
+                            <a class="nav-link waves-effect waves-light gold-color">
+                                <i class="fa fa-vk fa-lg"></i>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link waves-effect waves-light gold-color">
+                                <i class="fa fa-facebook fa-lg"></i>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link waves-effect waves-light gold-color">
+                                <i class="fa fa-instagram fa-lg"></i>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link waves-effect waves-light gold-color">
+                                <i class="fa fa-paper-plane fa-lg"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <div class="container">
+            <div class="row pt-5">
+                <div class="col text-center">
+                    @RenderBody()
+                </div>
+            </div>
+        </div>
+    </main>
+    <script src="~/Scripts/compiled.min.js"></script>
+    <script src="~/Scripts/app/_Layout.js"></script>
+</body>
+</html>

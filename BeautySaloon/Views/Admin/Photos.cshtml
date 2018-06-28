@@ -1,0 +1,59 @@
+﻿@{
+    ViewBag.Title = "Фотографии";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<script src="~/Scripts/knockout-3.4.2.js"></script>
+<script src="~/Scripts/binds/filebind.js"></script>
+<script src="~/Scripts/bootstrap.min.js"></script>
+<script src="~/Scripts/app/admin.photos.js"></script>
+<div class="row">
+    <h2>Фотографии</h2>
+    <button class="btn btn-success" data-toggle="modal" data-target="#photoModal">Добавить фото</button>
+    <hr />
+    <div data-bind="foreach: images">
+        <div class="col-md-6">
+            <img data-bind="attr: { id: id, src: '/Images/'+ FileName}" onclick="deletePhoto(this.id)" style="width: inherit;height: inherit;" />
+        </div>
+    </div>
+</div>
+<div class="modal fade" tabindex="-1" role="dialog" id="photoModal" data-bind="with:photoDialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Добавить фотографию</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-horizontal">
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">Фото</label>
+                        <div class="col-sm-8">
+                            <input type="file" id="inputFile" data-bind="file: file, allowed:'.jpg,.png'" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+                <button type="button" class="btn btn-success" data-dismiss="modal" data-bind="click:savePhoto">Сохранить</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" tabindex="-1" role="dialog" id="deletePhotoModal" data-bind="with:deletePhotoDialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Удаление фотографии</h4>
+            </div>
+            <div class="modal-body">
+                <p>Удалить фото?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+                <button type="button" class="btn btn-success" data-dismiss="modal" data-bind="click:deletePhoto">Удалить</button>
+            </div>
+        </div>
+    </div>
+</div>

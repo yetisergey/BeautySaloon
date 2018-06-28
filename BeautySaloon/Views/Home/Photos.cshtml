@@ -1,0 +1,21 @@
+﻿@{
+    ViewBag.Title = "Фотогалерея";
+}
+
+<h2>@ViewBag.Title</h2>
+<div class="row mb-4 mt-4">
+    <div class="col-md-12">
+        <div id="mdb-lightbox-ui"></div>
+        <div class="mdb-lightbox no-margin" data-bind="foreach: images">
+            <figure class="col-md-3">
+                <a data-bind="attr: { href: '/Images/'+ FileName ,'data-size':Size}">
+                    <img data-bind="attr: {id:id, src: '/Images/'+ FileName}" class="img-fluid">
+                </a>
+            </figure>
+        </div>
+    </div>
+</div>
+
+<script src="~/Scripts/jquery-2.0.0.min.js"></script>
+<script src="~/Scripts/knockout-3.4.2.js"></script>
+<script src="~/Scripts/app/home.photo.js"></script>

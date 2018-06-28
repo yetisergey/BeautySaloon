@@ -1,0 +1,32 @@
+﻿.view {
+    background: url("/img/main2.jpg")no-repeat center center;
+    background-size: cover;
+}
+
+.view {
+    margin-top: -56px;
+}
+
+@media (min-width: 768px) {
+    .view {
+        overflow: visible;
+        margin-top: -56px;
+    }
+}
+
+.navbar {
+    background-color: transparent;
+    z-index: 1;
+}
+
+.top-nav-collapse {
+    background-color: #4285F4;
+}
+
+.gold-color {
+    color: #e6a955 !important;
+}
+
+.back-black-color {
+    background-color: #f4f4f4 !important;
+}
